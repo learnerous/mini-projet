@@ -2,7 +2,7 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/learnerous/mini-projet/controllers"
+	"github.com/learnerous/mini-projet/internal/controllers"
 )
 
 // func helloDataProvider(c *gin.Context) {
