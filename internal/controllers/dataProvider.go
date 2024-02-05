@@ -34,6 +34,6 @@ func GetDataProvider(c *gin.Context) {
 	c.JSON(http.StatusOK, "Hello Data Provider")
 }
 func CreateDataProvider(c *gin.Context) {
-	fmt.Println("trying to create a new data provider", c.Params)
+	fmt.Println("trying to create a new data provider", c.Params.ByName("id"))
 	c.JSON(http.StatusOK, "trying to create a new data provider")
 }
