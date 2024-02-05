@@ -1,4 +1,4 @@
-package routers
+package internal
 
 import (
 	"mini_projet/internal/controllers"

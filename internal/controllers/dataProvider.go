@@ -2,11 +2,55 @@ package controllers
 
 import (
 	"fmt"
+	"mini_projet/internal/dao"
+	"mini_projet/internal/dto"
 	"net/http"
 
+	"bitbucket.org/amaltheafs/pkg/logutil"
+	"bitbucket.org/amaltheafs/tenant-server/pkg/serializers"
 	"github.com/gin-gonic/gin"
-	"go.mongodb.org/mongo-driver/mongo"
 )
+
+type Controller struct {
+	CRUDDataProvider dao.ICRUDDataProvider
+}
+
+func (Controller *Controller) CreateDataProvider(c *gin.Context) {
+
+	var dto dto.CreateDataProvider
+	err := c.ShouldBind(&dto)
+	fmt.Println("dto", dto)
+	if err != nil {
+		logutil.Logger().Errorf("%s", err)
+		c.JSON(http.StatusBadRequest, "Invalid request")
+		return
+	}
+	dataprovider, err := serializers.DeserializeCreateDto(dto)
+	if err != nil {
+		logutil.Logger().Errorf("%s", err)
+		c.JSON(http.StatusBadRequest, "Invalid request")
+		return
+	}
+	dataprovider, err = Controller.CRUDDataProvider.CreateDataProvider(c, dataprovider)
+	getDto, err := serializers.Serialize(*dataprovider)
+	c.JSON(http.StatusOK, getDto)
+	//raw, err := c.GetRawData()
+	// var dataProviderdto models.DataProvider
+
+	// body, err := ioutil.ReadAll(c.Request.Body)
+	// err = c.BindJSON(dataProviderdto)
+
+	// fmt.Println("trying to create a new data provider with id :", string(body), dataProviderdto, err)
+	// c.JSON(http.StatusOK, "trying to create a new data provider")
+}
+func GetDataProvider(c *gin.Context) {
+
+	// if err := db.Find(&posts).All(nil); err != nil {
+	//  c.AbortWithStatus(http.StatusInternalServerError)
+	//  return
+	// }
+	c.JSON(http.StatusOK, "Hello Data Provider")
+}
 
 //create a new data provider
 // func (c *controller) CreateDataProvider(ctx *gin.Context) {
@@ -22,18 +66,3 @@ import (
 // 		return
 // 	}
 // 	ctx.JSON(http.StatusCreated, dataProvider)
-// }
-var db *mongo.Collection
-
-func GetDataProvider(c *gin.Context) {
-
-	// if err := db.Find(&posts).All(nil); err != nil {
-	//  c.AbortWithStatus(http.StatusInternalServerError)
-	//  return
-	// }
-	c.JSON(http.StatusOK, "Hello Data Provider")
-}
-func CreateDataProvider(c *gin.Context) {
-	fmt.Println("trying to create a new data provider", c.Params.ByName("id"))
-	c.JSON(http.StatusOK, "trying to create a new data provider")
-}
