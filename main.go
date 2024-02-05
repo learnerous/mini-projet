@@ -2,12 +2,11 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/path/to/Routers" // Import the package that contains the SetupRouter function
+	routers "mini_projet/Routers"
 )
 
 func main() {
-	r := Routers.SetupRouter()
+	r := routers.SetupRouter()
 	fmt.Println("Server started on port 8080")
 	r.Run()
 }

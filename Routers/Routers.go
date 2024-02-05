@@ -2,13 +2,17 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/path/to/controllers" // Import the "controllers" package
 )
+
+// func helloDataProvider(c *gin.Context) {
+// 	// Implement the logic for helloDataProvider here
+// }
 
 func SetupRouter() *gin.Engine {
 	r := gin.Default()
 	dp := r.Group("/data-providers")
 	{
-		dp.GET("/", controllers.HelloDataProvider) // Use the correct syntax to reference the "HelloDataProvider" function
+		dp.GET("/", controllers.helloDataProvider)
 	}
+	return r
 }
