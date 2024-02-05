@@ -1,9 +1,11 @@
 package controllers
 
 import (
-	"mini_projet/internal/apihelper"
+	"fmt"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 //create a new data provider
@@ -21,6 +23,17 @@ import (
 // 	}
 // 	ctx.JSON(http.StatusCreated, dataProvider)
 // }
-func helloDataProvider(c *gin.Context) {
-	apihelper.RespondJSON(c, 200, "	Hello Data Provider")
+var db *mongo.Collection
+
+func GetDataProvider(c *gin.Context) {
+
+	// if err := db.Find(&posts).All(nil); err != nil {
+	//  c.AbortWithStatus(http.StatusInternalServerError)
+	//  return
+	// }
+	c.JSON(http.StatusOK, "Hello Data Provider")
+}
+func CreateDataProvider(c *gin.Context) {
+	fmt.Println("trying to create a new data provider", c.Params)
+	c.JSON(http.StatusOK, "trying to create a new data provider")
 }
