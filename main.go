@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	routers "mini_projet/Routers"
+	routers "mini_projet/internal"
 )
 
 func main() {

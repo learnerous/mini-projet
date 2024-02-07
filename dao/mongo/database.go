@@ -14,7 +14,7 @@ var ctx context.Context
 
 func init() {
 	// Set client options
-	clientOptions := options.Client().ApplyURI("mongodb://localhost:27019")
+	clientOptions := options.Client().ApplyURI("mongodb://localhost:27018")
 
 	// Connect to MongoDB
 	client, err := mongo.Connect(context.Background(), clientOptions)
